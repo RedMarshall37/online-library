@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from '../../components/AuthContext';
+import "./AdminPanel.css";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]); // Состояние для списка пользователей
@@ -8,7 +9,7 @@ const AdminPanel = () => {
   const [newAdminUsername, setNewAdminUsername] = useState(''); // Состояние для имени нового администратора
   const [newBookTitle, setNewBookTitle] = useState(''); // Состояние для названия новой книги
   const [newBookAuthor, setNewBookAuthor] = useState(''); // Состояние для автора новой книги
-  const [newBookDescription, setNewBookDescription] = useState(''); // Состояние для описания новой книги
+  const [newBookText, setNewBookText] = useState('<p></p>'); // Состояние для описания новой книги
   const [books, setBooks] = useState([]); // Состояние для списка книг
   const [editingBookId, setEditingBookId] = useState(null); // Состояние для редактируемой книги
   const [searchTermTitle, setSearchTermTitle] = useState(''); // Состояние для строки поиска по названию
@@ -83,7 +84,7 @@ const AdminPanel = () => {
   // Добавление новой книги
   const addBook = async () => {
     try {
-      await axios.post('http://localhost:3000/books', { title: newBookTitle, author: newBookAuthor, description: newBookDescription }, {
+      await axios.post('http://localhost:3000/books', { title: newBookTitle, author: newBookAuthor, description: newBookText }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -91,7 +92,7 @@ const AdminPanel = () => {
       fetchBooks();
       setNewBookTitle('');
       setNewBookAuthor('');
-      setNewBookDescription('');
+      setNewBookText('<p></p>');
     } catch (error) {
       console.error('Error adding book:', error);
     }
@@ -117,13 +118,13 @@ const AdminPanel = () => {
     const bookToEdit = books.find((book) => book.id === bookId);
     setNewBookTitle(bookToEdit.title);
     setNewBookAuthor(bookToEdit.author);
-    setNewBookDescription(bookToEdit.description);
+    setNewBookText(bookToEdit.description);
   };
 
   // Обновление книги
   const updateBook = async () => {
     try {
-      await axios.patch(`http://localhost:3000/books/${editingBookId}`, { title: newBookTitle, author: newBookAuthor, description: newBookDescription }, {
+      await axios.patch(`http://localhost:3000/books/${editingBookId}`, { title: newBookTitle, author: newBookAuthor, description: newBookText }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -132,7 +133,7 @@ const AdminPanel = () => {
       setEditingBookId(null);
       setNewBookTitle('');
       setNewBookAuthor('');
-      setNewBookDescription('');
+      setNewBookText('<p></p>');
     } catch (error) {
       console.error('Error updating book:', error);
     }
@@ -160,55 +161,112 @@ const AdminPanel = () => {
     setSearchResults(filteredBooks);
   };
 
-  // Обработчик поиска по пользователю
+  // Обработчик поиска пользователей
   const handleSearchUser = (e) => {
     setSearchTermUser(e.target.value);
-    const filteredUsers = users.filter((user) =>
+    const filtered = users.filter((user) =>
       user.username.toLowerCase().includes(e.target.value.toLowerCase())
     );
-    setFilteredUsers(filteredUsers);
+    setFilteredUsers(filtered);
+  };
+
+  // Функция для автоматического добавления тегов <p>
+  const handleBookTextChange = (e) => {
+    const text = e.target.value;
+    const paragraphs = text.split('\n').map((paragraph) => `<p>${paragraph}</p>`).join('');
+    setNewBookText(paragraphs);
   };
 
   return (
-    <div>
+    <div className="admin-panel-container">
       <h2>Админ Панель</h2>
-
-      <div>
-        <h3>Пользователи</h3>
-        <input type="text" placeholder="Имя пользователя" value={searchTermUser} onChange={handleSearchUser} />
-        <ul>
-          {filteredUsers.map((user) => (
-            <li key={user.id}>
-              {user.username} {user.isAdmin ? '(Админ)' : ''}
-              {!user.isAdmin && <button onClick={() => makeAdmin(user.username)}>Сделать админом</button>}
-              {user.isAdmin && <button onClick={() => removeAdmin(user.username)}>Удалить админ. права</button>}
+      <section className="admin-panel-section">
+        <h3>Добавить книгу</h3>
+        <input
+          type="text"
+          value={newBookTitle}
+          onChange={(e) => setNewBookTitle(e.target.value)}
+          className="admin-panel-input"
+          placeholder="Введите название книги"
+        />
+        <input
+          type="text"
+          value={newBookAuthor}
+          onChange={(e) => setNewBookAuthor(e.target.value)}
+          className="admin-panel-input"
+          placeholder="Введите автора книги"
+        />
+        <textarea
+          value={newBookText}
+          onChange={handleBookTextChange}
+          className="admin-panel-input"
+          placeholder="Введите описание книги"
+        ></textarea>
+        {editingBookId ? (
+          <button onClick={updateBook} className="admin-panel-button">Обновить книгу</button>
+        ) : (
+          <button onClick={addBook} className="admin-panel-button">Добавить книгу</button>
+        )}
+      </section>
+      <section className="admin-panel-section">
+        <h3>Поиск книг</h3>
+        <input
+          type="text"
+          value={searchTermTitle}
+          onChange={handleSearchTitle}
+          className="admin-panel-input"
+          placeholder="Поиск по названию"
+        />
+        <input
+          type="text"
+          value={searchTermAuthor}
+          onChange={handleSearchAuthor}
+          className="admin-panel-input"
+          placeholder="Поиск по автору"
+        />
+        <ul className="admin-panel-list">
+          {searchResults.map((book) => (
+            <li key={book.id} className="admin-panel-list-item">
+              <div className="admin-panel-book-info">
+                <h4>{book.title}</h4>
+                <p>{book.author}</p>
+              </div>
+              <div className="admin-panel-actions">
+                <button onClick={() => editBook(book.id)} className="admin-panel-button">Редактировать</button>
+                <button onClick={() => deleteBook(book.id)} className="admin-panel-button">Удалить</button>
+              </div>
             </li>
           ))}
         </ul>
-      </div>
-
-      <h3>Добавить книгу</h3>
-      <input type="text" placeholder="Название" value={newBookTitle} onChange={(e) => setNewBookTitle(e.target.value)} />
-      <input type="text" placeholder="Автор" value={newBookAuthor} onChange={(e) => setNewBookAuthor(e.target.value)} />
-      <input type="text" placeholder="Описание книги" value={newBookDescription} onChange={(e) => setNewBookDescription(e.target.value)} />
-      <button onClick={editingBookId ? updateBook : addBook}>{editingBookId ? 'Обновить книгу' : 'Добавить книгу'}</button>
-
-      <h3>Поиск</h3>
-      <p>Введите название книги:</p>
-      <input type="text" placeholder="Название" value={searchTermTitle} onChange={handleSearchTitle} />
-      <p>Введите автора книги:</p>
-      <input type="text" placeholder="Автор" value={searchTermAuthor} onChange={handleSearchAuthor} />
-
-      <h3>Книги</h3>
-      <ul>
-        {searchResults.map((book) => (
-          <li key={book.id}>
-            {book.title} от {book.author}
-            <button onClick={() => deleteBook(book.id)}>Удалить</button>
-            <button onClick={() => editBook(book.id)}>Редактировать</button>
-          </li>
-        ))}
-      </ul>
+      </section>
+      <section className="admin-panel-section">
+        <h3>Поиск пользователей</h3>
+        <input
+          type="text"
+          value={searchTermUser}
+          onChange={handleSearchUser}
+          className="admin-panel-input"
+          placeholder="Поиск пользователей"
+        />
+        <ul className="admin-panel-list">
+          {filteredUsers.map((user) => (
+            <li key={user.id} className="admin-panel-list-item">
+              <div className="admin-panel-user-info">
+                <h4>{user.username}</h4>
+                <span>{user.isAdmin ? 'Администратор' : 'Пользователь'}</span>
+              </div>
+              <div className="admin-panel-actions">
+                {!user.isAdmin && (
+                  <button onClick={() => makeAdmin(user.username)} className="admin-panel-button">Назначить администратором</button>
+                )}
+                {user.isAdmin && (
+                  <button onClick={() => removeAdmin(user.username)} className="admin-panel-button">Удалить статус администратора</button>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 };

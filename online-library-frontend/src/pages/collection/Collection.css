@@ -1,0 +1,47 @@
+.collection-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    font-family: 'Georgia', serif;
+  }
+  
+  .collection-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #d7ccc8;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    font-family: 'Georgia', serif;
+  }
+  
+  .collection-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .collection-item {
+    border: 1px solid #d7ccc8;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  
+  .collection-link {
+    color: #6d4c41;
+    text-decoration: none;
+  }
+  
+  .collection-author {
+    color: #6d4c41;
+    margin-top: 5px;
+  }
+  
+  .collection-item p {
+    margin: 0;
+  }
+  

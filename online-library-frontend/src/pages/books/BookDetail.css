@@ -1,0 +1,47 @@
+.book-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    font-family: 'Georgia', serif;
+}
+
+.book-title {
+    color: #6d4c41;
+}
+
+.book-author {
+    color: #6d4c41;
+}
+
+.book-description {
+    color: #6d4c41;
+    margin-bottom: 20px;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-buttons button {
+    background-color: #6d4c41;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination-buttons button:hover {
+    background-color: #50362b;
+}
+
+.pagination-buttons button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

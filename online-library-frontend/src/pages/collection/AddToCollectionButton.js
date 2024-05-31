@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import axios from 'axios';
 import AuthContext from '../../components/AuthContext';
+import './AddToCollectionButton.css';
 
 // Компонент кнопки добавления книги в коллекцию
 const AddToCollectionButton = ({ bookId, onAdd }) => {
@@ -23,8 +24,9 @@ const AddToCollectionButton = ({ bookId, onAdd }) => {
   };
 
   return (
-    <button onClick={handleAddToCollection}>Добавить в коллекцию</button> // Кнопка для добавления книги
+    <button onClick={handleAddToCollection} className="add-to-collection-button">Добавить в коллекцию</button> // Применяем класс для стилизации
   );
+
 };
 
 export default AddToCollectionButton;

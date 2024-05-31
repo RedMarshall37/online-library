@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../../components/AuthContext';
+import './Register.css';
 
 function Register() {
   const [username, setUsername] = useState(''); // Состояние для имени пользователя
@@ -24,13 +25,13 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="register-container">
       <h2>Регистрация</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Имя пользователя" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="email" placeholder="Электронная почта" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Зарегистрироваться</button>
+        <input className="register-input" type="text" placeholder="Имя пользователя" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input className="register-input" type="email" placeholder="Электронная почта" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className="register-input" type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button className="register-button" type="submit">Зарегистрироваться</button>
       </form>
     </div>
   );

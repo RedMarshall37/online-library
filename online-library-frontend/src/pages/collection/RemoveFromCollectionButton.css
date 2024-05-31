@@ -1,0 +1,19 @@
+.remove-from-collection-button {
+    background-color: #8d6e63; /* Коричневый цвет для кнопок */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Georgia', serif; /* Шрифт для кнопок */
+  }
+  
+  .remove-from-collection-button:hover {
+    background-color: #795548; /* Более темный коричневый для кнопок при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход для изменения фона кнопок */
+  }
+  

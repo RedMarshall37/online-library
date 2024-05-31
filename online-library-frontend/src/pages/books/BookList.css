@@ -1,0 +1,53 @@
+.book-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fafafa; /* Светло-бежевый фон для контейнера */
+    border-radius: 10px;
+    font-family: 'Georgia', serif; /* Шрифт для придания теплого книжного стиля */
+  }
+  
+  .book-list-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5d4037; /* Темно-коричневый цвет для заголовка */
+  }
+  
+  .book-list-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #d7ccc8; /* Светло-коричневый цвет для границы полей */
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f5f5f5; /* Очень светло-серый фон для полей */
+    font-family: 'Georgia', serif; /* Шрифт для полей */
+  }
+  
+  .book-list-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .book-list-item {
+    border: 1px solid #d7ccc8; /* Светло-коричневый цвет для границы элементов */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #ffffff; /* Белый фон для элементов списка */
+  }
+  
+  .book-list-item p {
+    margin: 5px 0;
+  }
+  
+  .book-list-actions button {
+    margin-right: 5px;
+    font-family: 'Georgia', serif; /* Шрифт для кнопок */
+  }
+  
+  .book-list-actions button:hover {
+    background-color: #795548; /* Более темный коричневый для кнопок при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход для изменения фона кнопок */
+  }
+  

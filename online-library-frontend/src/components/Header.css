@@ -1,34 +1,42 @@
 .header-container {
-    background-color: #333;
-    padding: 1rem;
-  }
-  
-  .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .nav-list {
-    list-style-type: none;
-    display: flex;
-  }
-  
-  .nav-item {
-    margin-right: 1rem;
-  }
-  
-  .nav-item a {
-    color: white;
-    text-decoration: none;
-  }
+  background-color: #5d4037; /* Темно-коричневый фон для заголовка */
+  padding: 20px;
+  border-bottom: 2px solid #d7ccc8; /* Светло-коричневая граница снизу */
+  font-family: 'Georgia', serif; /* Шрифт для заголовка */
+}
 
-  .nav-item span {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .nav-item a:hover {
-    text-decoration: underline;
-  }
-  
+.nav-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #ffffff; /* Белый цвет текста для ссылок */
+  font-size: 16px;
+  font-family: 'Georgia', serif; /* Шрифт для ссылок */
+  transition: color 0.3s ease; /* Плавный переход для цвета текста */
+}
+
+.nav-item span {
+  color: #ffcc80; /* Светло-оранжевый цвет для приветствия пользователя */
+  font-size: 16px;
+  font-family: 'Georgia', serif; /* Шрифт для приветствия */
+  font-weight: bold; /* Жирный шрифт для выделения ника */
+}
+
+.nav-item a:hover {
+  color: #ffcc80; /* Светло-оранжевый цвет текста для ссылок при наведении */
+}

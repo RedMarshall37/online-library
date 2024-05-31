@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AddToCollectionButton from '../collection/AddToCollectionButton';
 import RemoveFromCollectionButton from '../collection/RemoveFromCollectionButton';
 import AuthContext from '../../components/AuthContext';
+import './BookList.css';
 
 // Компонент списка книг
 const BookList = () => {
@@ -65,29 +66,31 @@ const BookList = () => {
   };
 
   return (
-    <div>
+    <div className="book-list-container">
       <h2>Список книг</h2>
       <input
         type="text"
         placeholder="Поиск по названию"
         value={searchTitle}
-        onChange={(e) => setSearchTitle(e.target.value)} // Обновляем строку поиска по названию
+        onChange={(e) => setSearchTitle(e.target.value)}
+        className="book-list-input" // Применяем класс для стилизации
       />
       <input
         type="text"
         placeholder="Поиск по автору"
         value={searchAuthor}
-        onChange={(e) => setSearchAuthor(e.target.value)} // Обновляем строку поиска по автору
+        onChange={(e) => setSearchAuthor(e.target.value)}
+        className="book-list-input" // Применяем класс для стилизации
       />
-      <ul>
+      <ul className="book-list-list"> {/* Применяем класс для стилизации */}
         {filteredBooks.map(book => (
-          <li key={book.id}>
-            <Link to={`/book/${book.id}`}>{book.title}</Link> // Ссылка на страницу книги
+          <li key={book.id} className="book-list-item"> {/* Применяем класс для стилизации */}
+            <Link to={`/book/${book.id}`}>{book.title}</Link>
             <p>Автор: {book.author}</p>
             {isBookInCollection(book.id) ? (
-              <RemoveFromCollectionButton bookId={book.id} onRemove={handleRemove} /> // Кнопка для удаления книги из коллекции
+              <RemoveFromCollectionButton bookId={book.id} onRemove={handleRemove} />
             ) : (
-              <AddToCollectionButton bookId={book.id} onAdd={handleAdd} /> // Кнопка для добавления книги в коллекцию
+              <AddToCollectionButton bookId={book.id} onAdd={handleAdd} />
             )}
           </li>
         ))}

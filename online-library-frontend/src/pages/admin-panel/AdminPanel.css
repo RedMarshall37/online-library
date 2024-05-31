@@ -2,169 +2,90 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #fafafa; /* Светло-бежевый фон для контейнера */
+  border-radius: 10px;
+  font-family: 'Georgia', serif; /* Шрифт для придания теплого книжного стиля */
 }
 
 .admin-panel-container h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #5d4037; /* Темно-коричневый цвет для заголовка */
 }
 
-.add-book-section {
+/* Стили для секций */
+.admin-panel-section {
   margin-bottom: 30px;
 }
 
-.add-book-section h3 {
-  margin-bottom: 10px;
-}
-
-.add-book-section input[type="text"],
-.add-book-section textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.add-book-section textarea {
-  resize: vertical;
-}
-
-.add-book-section button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-}
-
-.add-book-section button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-.search-section {
-  margin-bottom: 30px;
-}
-
-.search-section h3 {
-  margin-bottom: 10px;
-}
-
-.search-section input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.search-section button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-}
-
-.search-section button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-.users-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.users-section li {
-  margin-bottom: 10px;
-}
-
-.users-section button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-}
-
-.users-section button:hover {
-  background-color: #0056b3;
-}
-
-.books-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.books-section li {
-  margin-bottom: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.book-info h4 {
-  margin-top: 0;
-}
-
-.book-actions button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-}
-
-.book-actions button:hover {
-  background-color: #0056b3;
-}
-
-.users-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.users-section li {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.user-info {
-  display: flex;
-  justify-content: space-between;
-}
-
-.user-info h4 {
-  margin: 0;
-}
-
-.search-section input[type="text"] {
+/* Общие стили для входных полей */
+.admin-panel-input {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #d7ccc8; /* Светло-коричневый цвет для границы полей */
   border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #f5f5f5; /* Очень светло-серый фон для полей */
+  font-family: 'Georgia', serif; /* Шрифт для полей */
 }
 
-.search-section button {
-  padding: 8px 15px;
+/* Стили для кнопок */
+.admin-panel-button {
+  background-color: #8d6e63; /* Коричневый цвет для кнопок */
+  color: white;
   border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 10px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Плавный переход для изменения фона кнопок */
+  font-family: 'Georgia', serif; /* Шрифт для кнопок */
 }
 
-.search-section button:hover {
-  background-color: #0056b3;
+.admin-panel-button:hover {
+  background-color: #795548; /* Более темный коричневый для кнопок при наведении */
+}
+
+/* Стили для списков */
+.admin-panel-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Стили для элементов списка */
+.admin-panel-list-item {
+  border: 1px solid #d7ccc8; /* Светло-коричневый цвет для границы элементов */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #ffffff; /* Белый фон для элементов списка */
+}
+
+/* Стили для отображаемой информации о пользователе и книге */
+.admin-panel-user-info h4,
+.admin-panel-book-info h4 {
+  color: #6d4c41; /* Коричневый цвет для заголовков */
+}
+
+.admin-panel-user-info span {
+  color: #d84315; /* Оранжевый цвет для текста (Админ) */
+}
+
+.admin-panel-info {
+  margin-bottom: 10px;
+}
+
+/* Стили для действий с пользователями и книгами */
+.admin-panel-actions {
+  display: flex;
+  align-items: center;
+}
+
+.admin-panel-actions button {
+  margin-right: 5px;
 }

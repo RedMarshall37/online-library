@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import axios from 'axios';
 import AuthContext from '../../components/AuthContext';
+import './RemoveFromCollectionButton.css';
 
 // Компонент кнопки удаления книги из коллекции
 const RemoveFromCollectionButton = ({ bookId, onRemove }) => {
@@ -23,7 +24,7 @@ const RemoveFromCollectionButton = ({ bookId, onRemove }) => {
   };
 
   return (
-    <button onClick={handleRemoveFromCollection}>Удалить из коллекции</button> // Кнопка для удаления книги
+    <button onClick={handleRemoveFromCollection} className="remove-from-collection-button">Удалить из коллекции</button> // Применяем класс для стилизации
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../components/AuthContext';
+import './Login.css';
 
 function Login() {
   const [username, setUsername] = useState(''); // Состояние для имени пользователя
@@ -16,12 +17,12 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Вход</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Имя пользователя" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Войти</button>
+        <input className="login-input" type="text" placeholder="Имя пользователя" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input className="login-input" type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button className="login-button" type="submit">Войти</button>
       </form>
     </div>
   );

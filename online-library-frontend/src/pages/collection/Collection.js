@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import RemoveFromCollectionButton from './RemoveFromCollectionButton';
 import AuthContext from '../../components/AuthContext';
+import './Collection.css';
 
 // Компонент страницы коллекции книг
 function Collection() {
@@ -44,30 +45,32 @@ function Collection() {
   };
 
   return (
-    <div>
+    <div className="collection-container">
       <h2>Моя коллекция</h2>
       <input
         type="text"
         placeholder="Поиск по названию"
         value={searchTitle}
-        onChange={(e) => setSearchTitle(e.target.value)} // Обновляем строку поиска по названию
+        onChange={(e) => setSearchTitle(e.target.value)}
+        className="collection-input"
       />
       <input
         type="text"
         placeholder="Поиск по автору"
         value={searchAuthor}
-        onChange={(e) => setSearchAuthor(e.target.value)} // Обновляем строку поиска по автору
+        onChange={(e) => setSearchAuthor(e.target.value)}
+        className="collection-input"
       />
 
       {filteredCollection.length === 0 ? (
-        <p>Книги не найдены</p> // Сообщение, если книги не найдены
+        <p>Книги не найдены</p>
       ) : (
-        <ul>
+        <ul className="collection-list">
           {filteredCollection.map((collection) => (
-            <li key={collection.book.id}>
-              <Link to={`/book/${collection.book.id}`}>{collection.book.title}</Link> // Ссылка на страницу книги
-              <p>Автор: {collection.book.author}</p>
-              <RemoveFromCollectionButton bookId={collection.book.id} onRemove={handleRemove} /> // Кнопка для удаления книги из коллекции
+            <li key={collection.book.id} className="collection-item">
+              <Link to={`/book/${collection.book.id}`} className="collection-link">{collection.book.title}</Link>
+              <p className="collection-author">Автор: {collection.book.author}</p>
+              <RemoveFromCollectionButton bookId={collection.book.id} onRemove={handleRemove} />
             </li>
           ))}
         </ul>

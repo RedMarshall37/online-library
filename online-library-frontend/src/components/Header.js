@@ -12,31 +12,31 @@ function Header() {
         <ul className="nav-list">
           {user && (
             <li className="nav-item">
-              <span>Привет, {user.username}!</span>
+              <span className="user-welcome">Привет, {user.username}!</span>
             </li>
           )}
           {user ? (
             <li className="nav-item" onClick={logout}>
-              <Link to='/'>Выйти</Link>
+              <Link to='/' className="nav-link">Выйти</Link>
             </li>
           ) : (
             <li className="nav-item">
-              <Link to='/auth'>Войти</Link>
+              <Link to='/auth' className="nav-link">Войти</Link>
             </li>
           )}
           {user && (
             <>
               <li className="nav-item">
-                <Link to="/books">Книги</Link>
+                <Link to="/books" className="nav-link">Книги</Link>
               </li>
               <li className="nav-item">
-                <Link to="/collection">Моя коллекция</Link>
+                <Link to="/collection" className="nav-link">Моя коллекция</Link>
               </li>
             </>
           )}
           {user && user.isAdmin && (
             <li className="nav-item">
-              <Link to="/admin">Админ Панель</Link>
+              <Link to="/admin" className="nav-link">Админ Панель</Link>
             </li>
           )}
         </ul>
