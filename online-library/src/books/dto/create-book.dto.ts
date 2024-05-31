@@ -1,6 +1,6 @@
+// DTO (Data Transfer Object) для создания книги
 export class CreateBookDto {
-    title: string;
-    author: string;
-    description?: string;
-  }
-  
+  title: string; // Название книги
+  author: string; // Автор книги
+  description?: string; // Описание книги (необязательное поле)
+}

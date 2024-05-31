@@ -8,9 +8,8 @@ import { User } from 'src/users/user.entity';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Collection, User]),
-    UsersModule],
-  providers: [CollectionsService, UsersService],
-  controllers: [CollectionsController],
+  imports: [TypeOrmModule.forFeature([Collection, User]), UsersModule], // Импортируем модели Collection и User
+  providers: [CollectionsService, UsersService], // Указываем провайдеры (сервисы) модуля
+  controllers: [CollectionsController], // Указываем контроллеры модуля
 })
-export class CollectionsModule { }
+export class CollectionsModule {} // Экспортируем модуль коллекций

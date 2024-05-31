@@ -1,4 +1,4 @@
 export const getToken = () => {
-    return localStorage.getItem('token');
+    return localStorage.getItem('token'); //полуение токена из локального хранилища
   };
   

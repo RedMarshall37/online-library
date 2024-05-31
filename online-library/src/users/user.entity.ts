@@ -1,26 +1,26 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
-import { Collection } from '../collections/collection.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm'; // Импортируем необходимые декораторы из TypeORM
+import { Collection } from '../collections/collection.entity'; // Импортируем сущность Collection
 
-@Entity()
+@Entity() // Объявляем класс как сущность базы данных
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn() // Определяем поле как первичный ключ с автоинкрементом
+  id: number; // Идентификатор пользователя
 
-  @Column({ unique: true })
-  username: string;
+  @Column({ unique: true }) // Определяем поле как колонку в базе данных с уникальным значением
+  username: string; // Имя пользователя
 
-  @Column()
-  password: string;
+  @Column() // Определяем поле как колонку в базе данных
+  password: string; // Пароль пользователя
 
-  @Column({ unique: true })
-  email: string;
+  @Column({ unique: true }) // Определяем поле как колонку в базе данных с уникальным значением
+  email: string; // Электронная почта пользователя
 
-  @Column({ default: false })
-  isAdmin: boolean;
+  @Column({ default: false }) // Определяем поле как колонку в базе данных с значением по умолчанию
+  isAdmin: boolean; // Роль администратора
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn() // Определяем поле как колонку в базе данных для даты создания записи
+  createdAt: Date; // Дата создания пользователя
 
-  @OneToMany(() => Collection, collection => collection.user)
-  collections: Collection[];
+  @OneToMany(() => Collection, collection => collection.user) // Определяем отношение "один ко многим" с сущностью Collection
+  collections: Collection[]; // Коллекции пользователя
 }

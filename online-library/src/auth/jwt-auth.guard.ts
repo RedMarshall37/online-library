@@ -1,7 +1,7 @@
-import { Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Reflector } from '@nestjs/core';
-import { IS_PUBLIC_KEY } from './skip-auth.decorator';
+import { Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/common'; // Импортируем необходимые декораторы и исключения из NestJS
+import { AuthGuard } from '@nestjs/passport'; // Импортируем класс AuthGuard из Passport
+import { Reflector } from '@nestjs/core'; // Импортируем Reflector для работы с метаданными
+import { IS_PUBLIC_KEY } from './skip-auth.decorator'; // Импортируем ключ IS_PUBLIC_KEY из декоратора
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -13,18 +13,19 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
-    ]);
+    ]); // Получаем информацию о доступности маршрута
+
     if (isPublic) {
-      return true;
+      return true; // Если маршрут общедоступный, разрешаем доступ
     }
-    return super.canActivate(context);
+    return super.canActivate(context); // В противном случае вызываем canActivate из AuthGuard
   }
 
   handleRequest(err, user, info) {
-    // You can throw an exception based on either "info" or "err" arguments
+    // Обработка запроса
     if (err || !user) {
-      throw err || new UnauthorizedException();
+      throw err || new UnauthorizedException(); // Если есть ошибка или пользователь не авторизован, выбрасываем исключение
     }
-    return user;
+    return user; // Возвращаем пользователя
   }
 }

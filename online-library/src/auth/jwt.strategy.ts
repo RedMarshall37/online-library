@@ -1,19 +1,19 @@
-import { Strategy, ExtractJwt } from 'passport-jwt';
-import { PassportStrategy } from '@nestjs/passport';
-import { Injectable } from '@nestjs/common';
-import { jwtConstants } from './constants';
+import { Strategy, ExtractJwt } from 'passport-jwt'; // Импортируем классы для стратегии JWT из Passport
+import { PassportStrategy } from '@nestjs/passport'; // Импортируем класс для стратегии паспорта из NestJS
+import { Injectable } from '@nestjs/common'; // Импортируем Injectable из NestJS
+import { jwtConstants } from './constants'; // Импортируем константы секретного ключа JWT
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: jwtConstants.secret,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Извлекаем JWT из заголовка авторизации
+      ignoreExpiration: false, // Не игнорируем срок действия токена
+      secretOrKey: jwtConstants.secret, // Устанавливаем секретный ключ
     });
   }
 
   async validate(payload: any) {
-    return { username: payload.username, isAdmin: payload.isAdmin };
+    return { username: payload.username, isAdmin: payload.isAdmin }; // Возвращаем объект с данными пользователя из JWT
   }
 }

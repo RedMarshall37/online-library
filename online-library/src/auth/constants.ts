@@ -1,3 +1,3 @@
 export const jwtConstants = {
-    secret: 'yourSecretKey', 
-  };
+  secret: 'yourSecretKey', // Секретный ключ для подписи JWT
+};
