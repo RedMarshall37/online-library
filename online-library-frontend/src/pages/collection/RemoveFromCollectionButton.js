@@ -1,4 +1,3 @@
-// src/components/RemoveFromCollectionButton.js
 import React, {useContext} from 'react';
 import axios from 'axios';
 import AuthContext from '../../components/AuthContext';

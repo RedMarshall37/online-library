@@ -1,4 +1,3 @@
-// src/components/BookDetail.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
