@@ -1,41 +1,42 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from './AuthContext';
+import './Header.css'; // Импорт стилей
 
 function Header() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext); // Получаем информацию о пользователе и функцию выхода из контекста авторизации
 
   return (
-    <header>
-      <nav>
-        <ul>
+    <header className="header-container">
+      <nav className="nav-container">
+        <ul className="nav-list">
           {user && (
-            <li>
-              <span>Ваш ник: {user.username}</span>
+            <li className="nav-item">
+              <span>Привет, {user.username}!</span>
             </li>
           )}
           {user ? (
-            <li onClick={logout}>
+            <li className="nav-item" onClick={logout}>
               <Link to='/'>Выйти</Link>
             </li>
           ) : (
-            <li>
+            <li className="nav-item">
               <Link to='/auth'>Войти</Link>
             </li>
           )}
           {user && (
-            <li>
-              <Link to="/books">Books</Link>
-            </li>
-          )}
-          {user && (
-            <li>
-              <Link to="/collection">Моя коллекция</Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link to="/books">Книги</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/collection">Моя коллекция</Link>
+              </li>
+            </>
           )}
           {user && user.isAdmin && (
-            <li>
-              <Link to="/admin">Admin Panel</Link>
+            <li className="nav-item">
+              <Link to="/admin">Админ Панель</Link>
             </li>
           )}
         </ul>

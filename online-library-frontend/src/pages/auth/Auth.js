@@ -5,17 +5,18 @@ import Register from '../../pages/auth/Register';
 import AuthContext from '../../components/AuthContext';
 
 function Auth() {
-  const { user } = useContext(AuthContext);
-  const [isLogin, setIsLogin] = useState(true);
-  
-if (user) {
-  return <Navigate to="/books" />;
-}
+  const { user } = useContext(AuthContext); // Получаем информацию о пользователе из контекста авторизации
+  const [isLogin, setIsLogin] = useState(true); // Состояние для переключения между формой входа и регистрации
+
+  if (user) {
+    return <Navigate to="/books" />; // Перенаправляем на страницу списка книг, если пользователь авторизован
+  }
+
   return (
     <div>
-      <button onClick={() => setIsLogin(true)}>Login</button>
-      <button onClick={() => setIsLogin(false)}>Register</button>
-      {isLogin ? <Login /> : <Register />}
+      <button onClick={() => setIsLogin(true)}>Вход</button>
+      <button onClick={() => setIsLogin(false)}>Регистрация</button>
+      {isLogin ? <Login /> : <Register />} {/* Отображаем форму входа или регистрации */}
     </div>
   );
 }

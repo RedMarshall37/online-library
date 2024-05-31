@@ -5,10 +5,11 @@ import AddToCollectionButton from '../collection/AddToCollectionButton';
 import AuthContext from '../../components/AuthContext';
 
 function BookDetail() {
-  const { token } = useContext(AuthContext);
-  const [book, setBook] = useState({});
-  const { id } = useParams();
+  const { token } = useContext(AuthContext); // Получаем токен из контекста авторизации
+  const [book, setBook] = useState({}); // Состояние для хранения информации о книге
+  const { id } = useParams(); // Получаем параметр id из URL
 
+  // Эффект для получения информации о книге при загрузке компонента
   useEffect(() => {
     const fetchBook = async () => {
       const response = await axios.get(`http://localhost:3000/books/${id}`, {
@@ -16,17 +17,17 @@ function BookDetail() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setBook(response.data);
+      setBook(response.data); // Устанавливаем информацию о книге
     };
     fetchBook();
-  }, [id]);
+  }, [id, token]);
 
   return (
     <div>
-      <h2>{book.title}</h2>
-      <p>{book.author}</p>
-      <p>{book.description}</p>
-      <AddToCollectionButton bookId={id} />
+      <h2>{book.title}</h2> {/* Заголовок книги */}
+      <p>{book.author}</p> {/* Автор книги */}
+      <p>{book.description}</p> {/* Текст книги */}
+      <AddToCollectionButton bookId={id} /> {/* Кнопка для добавления книги в коллекцию */}
     </div>
   );
 }
