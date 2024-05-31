@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import AuthContext from '../../components/AuthContext';
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
@@ -14,6 +15,7 @@ const AdminPanel = () => {
   const [searchTermAuthor, setSearchTermAuthor] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searchTermUser, setSearchTermUser] = useState('');
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     fetchUsers();
@@ -21,7 +23,6 @@ const AdminPanel = () => {
   }, []);
 
   const fetchUsers = async () => {
-    const token = localStorage.getItem('token');
     try {
       const response = await axios.get('http://localhost:3000/users', {
         headers: {
@@ -36,7 +37,6 @@ const AdminPanel = () => {
   };
 
   const fetchBooks = async () => {
-    const token = localStorage.getItem('token');
     try {
       const response = await axios.get('http://localhost:3000/books', {
         headers: {
@@ -52,7 +52,6 @@ const AdminPanel = () => {
 
   const makeAdmin = async (username) => {
     try {
-      const token = localStorage.getItem('token');
       await axios.post('http://localhost:3000/auth/make-admin', { username }, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -66,7 +65,6 @@ const AdminPanel = () => {
 
   const removeAdmin = async (username) => {
     try {
-      const token = localStorage.getItem('token');
       await axios.post('http://localhost:3000/auth/remove-admin', { username }, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -79,7 +77,6 @@ const AdminPanel = () => {
   };
 
   const addBook = async () => {
-    const token = localStorage.getItem('token');
     try {
       await axios.post('http://localhost:3000/books', { title: newBookTitle, author: newBookAuthor, description: newBookDescription }, {
         headers: {
@@ -96,7 +93,6 @@ const AdminPanel = () => {
   };
 
   const deleteBook = async (bookId) => {
-    const token = localStorage.getItem('token');
     try {
       await axios.delete(`http://localhost:3000/books/${bookId}`, {
         headers: {
@@ -118,7 +114,6 @@ const AdminPanel = () => {
   };
 
   const updateBook = async () => {
-    const token = localStorage.getItem('token');
     try {
       await axios.patch(`http://localhost:3000/books/${editingBookId}`, { title: newBookTitle, author: newBookAuthor, description: newBookDescription }, {
         headers: {

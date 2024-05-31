@@ -1,19 +1,19 @@
 // src/components/Collection.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { getToken } from '../helpers/token';
 import { Link } from 'react-router-dom';
 import RemoveFromCollectionButton from './RemoveFromCollectionButton';
+import AuthContext from '../../components/AuthContext';
 
 function Collection() {
   const [collection, setCollection] = useState([]);
   const [filteredCollection, setFilteredCollection] = useState([]);
   const [searchTitle, setSearchTitle] = useState('');
   const [searchAuthor, setSearchAuthor] = useState('');
+  const { token, user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchCollection = async () => {
-      const token = getToken();
       const response = await axios.get('http://localhost:3000/collections/user', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,6 +21,8 @@ function Collection() {
       });
       setCollection(response.data);
       setFilteredCollection(response.data);
+      console.log(user);
+      console.log(token);
     };
     fetchCollection();
   }, []);

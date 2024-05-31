@@ -1,13 +1,13 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Auth from './components/Auth';
-import BookList from './components/BookList';
-import BookDetail from './components/BookDetail';
-import Collection from './components/Collection';
+import Auth from './pages/auth/Auth';
+import BookList from './pages/books/BookList';
+import BookDetail from './pages/books/BookDetail';
+import Collection from './pages/collection/Collection';
 import PrivateRoute from './components/PrivateRoute';
 import Header from './components/Header';
-import AdminPanel from './components/AdminPanel';
+import AdminPanel from './pages/admin-panel/AdminPanel';
 import { AuthProvider } from './components/AuthContext';
 
 function App() {

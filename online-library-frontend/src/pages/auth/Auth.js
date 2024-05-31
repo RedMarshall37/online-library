@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import AuthContext from './AuthContext';
+import Login from '../../pages/auth/Login';
+import Register from '../../pages/auth/Register';
+import AuthContext from '../../components/AuthContext';
 
 function Auth() {
   const { user } = useContext(AuthContext);

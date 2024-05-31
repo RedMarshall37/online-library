@@ -1,11 +1,11 @@
 // src/components/RemoveFromCollectionButton.js
-import React from 'react';
+import React, {useContext} from 'react';
 import axios from 'axios';
-import { getToken } from '../helpers/token';
+import AuthContext from '../../components/AuthContext';
 
 const RemoveFromCollectionButton = ({ bookId, onRemove }) => {
+  const { token } = useContext(AuthContext);
   const handleRemoveFromCollection = async () => {
-    const token = getToken();
     try {
       await axios.delete(`http://localhost:3000/collections/remove/${bookId}`, {
         headers: {

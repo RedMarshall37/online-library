@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      console.log(token);
       if (token) {
         try {
           const response = await axios.get('http://localhost:3000/users/me', {

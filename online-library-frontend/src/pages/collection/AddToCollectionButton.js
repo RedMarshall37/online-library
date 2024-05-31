@@ -1,11 +1,11 @@
 // src/components/AddToCollectionButton.js
-import React from 'react';
+import React, {useContext} from 'react';
 import axios from 'axios';
-import { getToken } from '../helpers/token';
+import AuthContext from '../../components/AuthContext';
 
 const AddToCollectionButton = ({ bookId, onAdd }) => {
+  const { token } = useContext(AuthContext);
   const handleAddToCollection = async () => {
-    const token = getToken();
     try {
       await axios.post(`http://localhost:3000/collections/add/${bookId}`, {}, {
         headers: {

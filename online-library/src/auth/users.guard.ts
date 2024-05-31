@@ -24,7 +24,6 @@ import {
       }
   
       const request = context.switchToHttp().getRequest();
-      console.log(request.params.id);
       const userId = request.params.id;
       const authHeader = request.headers.authorization;
       const token = authHeader.split(' ')[1];

@@ -15,9 +15,10 @@ export class CollectionsController {
   }
 
   @Get('user')
-  async getUserCollection(@Request() req) {
-    const userId = req.user.id;
-    return this.collectionsService.getUserCollection(userId);
+  async getUserCollection(@AuthUser() user: any) {
+    let userFromDB: Promise<User> = this.userService.findOne(user.username);
+    console.log((await userFromDB).id);
+    return this.collectionsService.getUserCollection((await userFromDB).id);
   }
 
   @Delete('remove/:bookId')

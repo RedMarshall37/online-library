@@ -1,10 +1,10 @@
 // src/components/BookList.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { getToken } from '../helpers/token';
-import AddToCollectionButton from './AddToCollectionButton';
-import RemoveFromCollectionButton from './RemoveFromCollectionButton';
+import AddToCollectionButton from '../collection/AddToCollectionButton';
+import RemoveFromCollectionButton from '../collection/RemoveFromCollectionButton';
+import AuthContext from '../../components/AuthContext';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -12,12 +12,12 @@ const BookList = () => {
   const [searchTitle, setSearchTitle] = useState('');
   const [searchAuthor, setSearchAuthor] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const token = getToken();
         const response = await axios.get('http://localhost:3000/books', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +34,6 @@ const BookList = () => {
 
     const fetchCollection = async () => {
       try {
-        const token = getToken();
         const response = await axios.get('http://localhost:3000/collections/user', {
           headers: {
             Authorization: `Bearer ${token}`,

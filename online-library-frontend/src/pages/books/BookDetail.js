@@ -1,17 +1,17 @@
 // src/components/BookDetail.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { getToken } from '../helpers/token';
-import AddToCollectionButton from './AddToCollectionButton';
+import AddToCollectionButton from '../collection/AddToCollectionButton';
+import AuthContext from '../../components/AuthContext';
 
 function BookDetail() {
+  const { token } = useContext(AuthContext);
   const [book, setBook] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
     const fetchBook = async () => {
-      const token = getToken();
       const response = await axios.get(`http://localhost:3000/books/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
