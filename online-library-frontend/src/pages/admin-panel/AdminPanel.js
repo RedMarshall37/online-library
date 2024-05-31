@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import AuthContext from '../../components/AuthContext';
-import "./AdminPanel.css";
+import React, { useEffect, useState, useContext } from 'react'; // Импортируем React и хуки useEffect, useState, useContext из библиотеки React
+import axios from 'axios'; // Импортируем axios для отправки HTTP-запросов
+import AuthContext from '../../components/AuthContext'; // Импортируем контекст авторизации
+import "./AdminPanel.css"; // Импортируем стили для админ-панели
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]); // Состояние для списка пользователей
@@ -18,163 +18,164 @@ const AdminPanel = () => {
   const [searchTermUser, setSearchTermUser] = useState(''); // Состояние для строки поиска по пользователю
   const { token } = useContext(AuthContext); // Получаем токен из контекста авторизации
 
+  // Загружаем список пользователей и книг при монтировании компонента
   useEffect(() => {
     fetchUsers();
     fetchBooks();
   }, []);
 
-  // Получение списка пользователей
+  // Функция для получения списка пользователей
   const fetchUsers = async () => {
     try {
       const response = await axios.get('http://localhost:3000/users', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
       setUsers(response.data); // Устанавливаем список пользователей
       setFilteredUsers(response.data); // Устанавливаем отфильтрованных пользователей
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error fetching users:', error); // Обрабатываем ошибку
     }
   };
 
-  // Получение списка книг
+  // Функция для получения списка книг
   const fetchBooks = async () => {
     try {
       const response = await axios.get('http://localhost:3000/books', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
       setBooks(response.data); // Устанавливаем список книг
       setSearchResults(response.data); // Устанавливаем результаты поиска при загрузке всех книг
     } catch (error) {
-      console.error('Error fetching books:', error);
+      console.error('Error fetching books:', error); // Обрабатываем ошибку
     }
   };
 
-  // Назначение пользователя администратором
+  // Функция для назначения пользователя администратором
   const makeAdmin = async (username) => {
     try {
       await axios.post('http://localhost:3000/auth/make-admin', { username }, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
-      fetchUsers();
+      fetchUsers(); // Обновляем список пользователей
     } catch (error) {
-      console.error('Error making user admin:', error);
+      console.error('Error making user admin:', error); // Обрабатываем ошибку
     }
   };
 
-  // Удаление статуса администратора у пользователя
+  // Функция для удаления статуса администратора у пользователя
   const removeAdmin = async (username) => {
     try {
       await axios.post('http://localhost:3000/auth/remove-admin', { username }, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
-      fetchUsers();
+      fetchUsers(); // Обновляем список пользователей
     } catch (error) {
-      console.error('Error removing admin status:', error);
+      console.error('Error removing admin status:', error); // Обрабатываем ошибку
     }
   };
 
-  // Добавление новой книги
+  // Функция для добавления новой книги
   const addBook = async () => {
     try {
       await axios.post('http://localhost:3000/books', { title: newBookTitle, author: newBookAuthor, description: newBookText }, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
-      fetchBooks();
-      setNewBookTitle('');
-      setNewBookAuthor('');
-      setNewBookText('<p></p>');
+      fetchBooks(); // Обновляем список книг
+      setNewBookTitle(''); // Сбрасываем состояние названия книги
+      setNewBookAuthor(''); // Сбрасываем состояние автора книги
+      setNewBookText('<p></p>'); // Сбрасываем состояние описания книги
     } catch (error) {
-      console.error('Error adding book:', error);
+      console.error('Error adding book:', error); // Обрабатываем ошибку
     }
   };
 
-  // Удаление книги
+  // Функция для удаления книги
   const deleteBook = async (bookId) => {
     try {
       await axios.delete(`http://localhost:3000/books/${bookId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
-      fetchBooks();
+      fetchBooks(); // Обновляем список книг
     } catch (error) {
-      console.error('Error deleting book:', error);
+      console.error('Error deleting book:', error); // Обрабатываем ошибку
     }
   };
 
-  // Редактирование книги
+  // Функция для редактирования книги
   const editBook = (bookId) => {
-    setEditingBookId(bookId);
-    const bookToEdit = books.find((book) => book.id === bookId);
-    setNewBookTitle(bookToEdit.title);
-    setNewBookAuthor(bookToEdit.author);
-    setNewBookText(bookToEdit.description);
+    setEditingBookId(bookId); // Устанавливаем редактируемую книгу
+    const bookToEdit = books.find((book) => book.id === bookId); // Находим книгу для редактирования
+    setNewBookTitle(bookToEdit.title); // Устанавливаем состояние названия книги
+    setNewBookAuthor(bookToEdit.author); // Устанавливаем состояние автора книги
+    setNewBookText(bookToEdit.description); // Устанавливаем состояние описания книги
   };
 
-  // Обновление книги
+  // Функция для обновления книги
   const updateBook = async () => {
     try {
       await axios.patch(`http://localhost:3000/books/${editingBookId}`, { title: newBookTitle, author: newBookAuthor, description: newBookText }, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
-      fetchBooks();
-      setEditingBookId(null);
-      setNewBookTitle('');
-      setNewBookAuthor('');
-      setNewBookText('<p></p>');
+      fetchBooks(); // Обновляем список книг
+      setEditingBookId(null); // Сбрасываем состояние редактируемой книги
+      setNewBookTitle(''); // Сбрасываем состояние названия книги
+      setNewBookAuthor(''); // Сбрасываем состояние автора книги
+      setNewBookText('<p></p>'); // Сбрасываем состояние описания книги
     } catch (error) {
-      console.error('Error updating book:', error);
+      console.error('Error updating book:', error); // Обрабатываем ошибку
     }
   };
 
   // Обработчик поиска по названию книги
   const handleSearchTitle = (e) => {
-    setSearchTermTitle(e.target.value);
+    setSearchTermTitle(e.target.value); // Устанавливаем состояние строки поиска по названию
     const filteredBooks = books.filter(
       (book) =>
         book.title.toLowerCase().includes(e.target.value.toLowerCase()) &&
         book.author.toLowerCase().includes(searchTermAuthor.toLowerCase())
     );
-    setSearchResults(filteredBooks);
+    setSearchResults(filteredBooks); // Устанавливаем результаты поиска
   };
 
   // Обработчик поиска по автору книги
   const handleSearchAuthor = (e) => {
-    setSearchTermAuthor(e.target.value);
+    setSearchTermAuthor(e.target.value); // Устанавливаем состояние строки поиска по автору
     const filteredBooks = books.filter(
       (book) =>
         book.title.toLowerCase().includes(searchTermTitle.toLowerCase()) &&
         book.author.toLowerCase().includes(e.target.value.toLowerCase())
     );
-    setSearchResults(filteredBooks);
+    setSearchResults(filteredBooks); // Устанавливаем результаты поиска
   };
 
   // Обработчик поиска пользователей
   const handleSearchUser = (e) => {
-    setSearchTermUser(e.target.value);
+    setSearchTermUser(e.target.value); // Устанавливаем состояние строки поиска по пользователю
     const filtered = users.filter((user) =>
       user.username.toLowerCase().includes(e.target.value.toLowerCase())
     );
-    setFilteredUsers(filtered);
+    setFilteredUsers(filtered); // Устанавливаем отфильтрованных пользователей
   };
 
-  // Функция для автоматического добавления тегов <p>
+  // Функция для автоматического добавления тегов <p> в описание книги
   const handleBookTextChange = (e) => {
-    const text = e.target.value;
-    const paragraphs = text.split('\n').map((paragraph) => `<p>${paragraph}</p>`).join('');
-    setNewBookText(paragraphs);
+    const text = e.target.value; // Получаем текст из текстового поля
+    const paragraphs = text.split('\n').map((paragraph) => `<p>${paragraph}</p>`).join(''); // Разделяем текст на абзацы и оборачиваем их в теги <p>
+    setNewBookText(paragraphs); // Устанавливаем состояние описания книги
   };
 
   return (

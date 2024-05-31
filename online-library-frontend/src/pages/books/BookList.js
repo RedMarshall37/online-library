@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import AddToCollectionButton from '../collection/AddToCollectionButton';
-import RemoveFromCollectionButton from '../collection/RemoveFromCollectionButton';
-import AuthContext from '../../components/AuthContext';
-import './BookList.css';
+import React, { useEffect, useState, useContext } from 'react'; // Импортируем React и хуки из библиотеки React
+import axios from 'axios'; // Импортируем axios для отправки HTTP-запросов
+import { Link, useNavigate } from 'react-router-dom'; // Импортируем компоненты Link и useNavigate из библиотеки react-router-dom
+import AddToCollectionButton from '../collection/AddToCollectionButton'; // Импортируем компонент добавления книги в коллекцию
+import RemoveFromCollectionButton from '../collection/RemoveFromCollectionButton'; // Импортируем компонент удаления книги из коллекции
+import AuthContext from '../../components/AuthContext'; // Импортируем контекст авторизации
+import './BookList.css'; // Импортируем стили для списка книг
 
 // Компонент списка книг
 const BookList = () => {
@@ -19,22 +19,22 @@ const BookList = () => {
   // Эффект для получения списка книг при загрузке компонента
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await axios.get('http://localhost:3000/books', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setBooks(response.data); // Устанавливаем список книг
-      setFilteredBooks(response.data); // Устанавливаем отфильтрованные книги
+      try {
+        const response = await axios.get('http://localhost:3000/books', { headers: { Authorization: `Bearer ${token}` } });
+        setBooks(response.data); // Устанавливаем список книг
+        setFilteredBooks(response.data); // Устанавливаем отфильтрованные книги
+      } catch (error) {
+        console.error('Ошибка при загрузке списка книг:', error); // Выводим ошибку в консоль
+      }
     };
 
     const fetchCollection = async () => {
-      const response = await axios.get('http://localhost:3000/collections/user', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setCollection(response.data); // Устанавливаем коллекцию книг
+      try {
+        const response = await axios.get('http://localhost:3000/collections/user', { headers: { Authorization: `Bearer ${token}` } });
+        setCollection(response.data); // Устанавливаем коллекцию книг
+      } catch (error) {
+        console.error('Ошибка при загрузке коллекции книг:', error); // Выводим ошибку в консоль
+      }
     };
 
     fetchBooks();

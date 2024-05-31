@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import AuthContext from './AuthContext';
+import React, { useContext } from 'react'; // Импортируем React и хук useContext из библиотеки React
+import { Navigate } from 'react-router-dom'; // Импортируем компонент Navigate из библиотеки react-router-dom
+import AuthContext from './AuthContext'; // Импортируем контекст авторизации
 
+// Компонент для приватных маршрутов
 const PrivateRoute = ({ children, adminOnly }) => {
   const { user } = useContext(AuthContext); // Получаем информацию о пользователе из контекста авторизации
 

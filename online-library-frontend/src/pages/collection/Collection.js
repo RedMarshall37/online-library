@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import RemoveFromCollectionButton from './RemoveFromCollectionButton';
-import AuthContext from '../../components/AuthContext';
-import './Collection.css';
+import React, { useState, useEffect, useContext } from 'react'; // Импортируем React и хуки useState, useEffect, useContext
+import axios from 'axios'; // Импортируем axios для выполнения HTTP-запросов
+import { Link } from 'react-router-dom'; // Импортируем Link для навигации
+import RemoveFromCollectionButton from './RemoveFromCollectionButton'; // Импортируем компонент кнопки удаления из коллекции
+import AuthContext from '../../components/AuthContext'; // Импортируем контекст авторизации
+import './Collection.css'; // Импортируем стили для компонента
 
 // Компонент страницы коллекции книг
 function Collection() {
@@ -18,7 +18,7 @@ function Collection() {
     const fetchCollection = async () => {
       const response = await axios.get('http://localhost:3000/collections/user', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Отправляем токен авторизации
         },
       });
       setCollection(response.data); // Устанавливаем коллекцию книг
@@ -27,7 +27,7 @@ function Collection() {
       console.log(token);
     };
     fetchCollection();
-  }, []);
+  }, [token, user]); // Добавляем зависимости token и user
 
   // Эффект для фильтрации коллекции при изменении строки поиска или коллекции
   useEffect(() => {
@@ -36,7 +36,7 @@ function Collection() {
       collection.book.author.toLowerCase().includes(searchAuthor.toLowerCase())
     );
     setFilteredCollection(filtered); // Устанавливаем отфильтрованную коллекцию
-  }, [collection, searchTitle, searchAuthor]);
+  }, [collection, searchTitle, searchAuthor]); // Добавляем зависимости collection, searchTitle, searchAuthor
 
   // Функция для обработки удаления книги из коллекции
   const handleRemove = (bookId) => {

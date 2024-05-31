@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import axios from 'axios';
-import AuthContext from '../../components/AuthContext';
-import './AddToCollectionButton.css';
+import React, { useContext } from 'react'; // Импортируем React и хук useContext из библиотеки React
+import axios from 'axios'; // Импортируем axios для отправки HTTP-запросов
+import AuthContext from '../../components/AuthContext'; // Импортируем контекст авторизации
+import './AddToCollectionButton.css'; // Импортируем стили для кнопки добавления
 
 // Компонент кнопки добавления книги в коллекцию
 const AddToCollectionButton = ({ bookId, onAdd }) => {
@@ -12,9 +12,7 @@ const AddToCollectionButton = ({ bookId, onAdd }) => {
     try {
       // Отправляем запрос на добавление книги в коллекцию
       await axios.post(`http://localhost:3000/collections/add/${bookId}`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       alert('Книга добавлена в коллекцию'); // Сообщаем пользователю об успешном добавлении
       onAdd(bookId); // Вызываем функцию обратного вызова для обновления состояния коллекции
@@ -26,7 +24,6 @@ const AddToCollectionButton = ({ bookId, onAdd }) => {
   return (
     <button onClick={handleAddToCollection} className="add-to-collection-button">Добавить в коллекцию</button> // Применяем класс для стилизации
   );
-
 };
 
 export default AddToCollectionButton;
